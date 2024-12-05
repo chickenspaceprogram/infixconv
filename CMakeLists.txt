@@ -1,0 +1,1 @@
+cmake_minimum_required(VERSION 3.15) # this hasn't been tested with lower CMake versions, it might still work
