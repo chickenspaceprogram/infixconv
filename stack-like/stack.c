@@ -16,7 +16,7 @@
 /* Public */
 int push(Stack *stack, void *obj);
 int pop(Stack *stack, void *buf);
-void peek(Stack *stack, void *buf);
+int peek(Stack *stack, void *buf);
 void stack_free(Stack *stack);
 
 /* Private */
@@ -36,6 +36,7 @@ Stack newStack(size_t element_size) {
         .peek = &peek,
         .free = &stack_free
     };
+    new.data_arr = malloc(new.element_size * new.space); // user must check this for NULL
     return new;
 }
 
@@ -49,19 +50,30 @@ int push(Stack *stack, void *obj) {
     }
 
     ++(stack->num_elements);
-    memcpy(stack->data_arr + stack->num_elements * stack->element_size, obj, stack->element_size);
+
+    memcpy((char *)stack->data_arr + stack->num_elements * stack->element_size, obj, stack->element_size);
+    return 0;
 }
 
 int pop(Stack *stack, void *buf) {
-    stack->peek(stack, buf);
+
+    if (stack->peek(stack, buf) == -1) {
+        return -1;
+    }
+    
     --(stack->num_elements);
     if ((stack->num_elements < stack->space / STACK_REDUCE_TRIGGER) && stack->space > MIN_STACK_SIZE) {
         return realloc_stack(stack, stack->space / STACK_REDUCE_MULTIPLIER);
     }
+    return 0;
 }
 
-void peek(Stack *stack, void *buf) {
-    memcpy(buf, stack->data_arr + stack->num_elements * stack->element_size, stack->element_size);
+int peek(Stack *stack, void *buf) {
+    if (stack->num_elements == 0) {
+        return -1;
+    }
+    memcpy(buf, (char *)stack->data_arr + stack->num_elements * stack->element_size, stack->element_size);
+    return 0;
 }
 
 void stack_free(Stack *stack) {

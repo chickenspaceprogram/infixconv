@@ -22,7 +22,7 @@ struct stack {
     // methods
     int (*push)(Stack *stack, void *obj); // pushes an object onto the stack, returns success/failure code
     int (*pop)(Stack *stack, void *buf); // copies the top object into `buf`, then pops it off the stack
-    void (*peek)(Stack *stack, void *buf); // copies the top object into `buf`
+    int (*peek)(Stack *stack, void *buf); // copies the top object into `buf`
     void (*free)(Stack *stack); // frees the stack
 };
 

@@ -1,0 +1,4 @@
+test/*
+!test/tests/*
+!test/tests/
+!CMakeLists.txt
