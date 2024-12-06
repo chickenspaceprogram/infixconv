@@ -15,8 +15,6 @@ project(infixconv
 add_library(infixconv
     infixconv.h
     infixconv.c
-)
-
-target_link_libraries(infixconv
-    stack-like
+    stack.c
+    stack.h
 )
