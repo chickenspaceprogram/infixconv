@@ -3,16 +3,16 @@
 #  file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 cmake_minimum_required(VERSION 3.15)
-project(infixconv-tests C)
+project(parseinfix-tests C)
 set(CMAKE_BUILD_TYPE Debug)
 
-add_subdirectory(../ ./infixconv)
+add_subdirectory(../ ./parseinfix)
 
 add_executable(TEST-stack
     tests/TEST-stack.c
 )
 
-target_link_libraries(TEST-stack infixconv)
+target_link_libraries(TEST-stack parseinfix)
 
 enable_testing()
 

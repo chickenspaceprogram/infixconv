@@ -4,17 +4,15 @@
 
 cmake_minimum_required(VERSION 3.15) # this hasn't been tested with lower CMake versions, but it might still work. just change this value to whatever version of CMake you have installed and give it a try!
 
-add_subdirectory(stack-like)
-
-project(infixconv
+project(parseinfix
     VERSION 0.1
     DESCRIPTION "An implementation of Dijkstra's shunting yard algorithm in C"
     LANGUAGES C
 )
 
-add_library(infixconv
-    infixconv.h
-    infixconv.c
+add_library(parseinfix
+    parseinfix.h
+    parseinfix.c
     stack.c
     stack.h
 )
